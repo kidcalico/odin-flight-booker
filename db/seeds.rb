@@ -19,15 +19,26 @@ airports.each do |location|
   end
 end
 
-flights = [ { departure_time: "2026-07-05 08:30:00", departure_airport_id: Airport.find_by(code: "SAN").id, arrival_time: "2026-07-05 14:00:00", arrival_airport_id: Airport.find_by(code: "JFK").id, duration: 330 }, { departure_time: "2026-07-05 10:30:00", departure_airport_id: Airport.find_by(code: "SAN").id, arrival_time: "2026-07-05 16:00:00", arrival_airport_id: Airport.find_by(code: "JFK").id, duration: 330 }, { departure_time: "2026-07-05 16:30:00", departure_airport_id: Airport.find_by(code: "SAN").id, arrival_time: "2026-07-05 22:00:00", arrival_airport_id: Airport.find_by(code: "JFK").id, duration: 330 } ]
+departures = Airport.all
+arrivals = Airport.all
 
-flights.each do |hash|
-  Flight.create do |flight|
-    flight.departure_time = hash[:departure_time]
-    flight.arrival_time = hash[:arrival_time]
-    flight.departure_airport_id = hash[:departure_airport_id]
-    flight.arrival_airport_id = hash[:arrival_airport_id]
-    flight.duration = hash[:duration]
+offset = 0
+
+7.times do
+  departures.each do |departure|
+    arrivals.each do |arrival|
+      unless departure.code == arrival.code
+        Flight.create do |flight|
+          flight.departure_time = rand((Time.current + offset.days)..(1.day.from_now + offset.days))
+          flight.duration = rand(300..720)
+          flight.arrival_time = flight.departure_time + flight.duration.minutes
+          flight.departure_airport = departure
+          flight.arrival_airport = arrival
+        end
+      end
+    end
   end
+  offset += 1
 end
+
 puts "Database seeded."
