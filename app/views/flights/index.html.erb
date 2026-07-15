@@ -1,5 +1,18 @@
 <h1>Flights#index</h1>
 <p>Find me in app/views/flights/index.html.erb</p>
+
+<%= form_with(url: "/index", method: "get") do %>
+  <%= label_tag(:departure_airport, "Origin:") %>
+  <%= select_tag(:departure_airport, options_for_select(@airports)) %>
+  <%= label_tag(:arrival_airport, "Destination:") %>
+  <%= select_tag(:arrival_airport, options_for_select(@airports)) %>
+  <%= label_tag(:departure_time, "Departure date:")%>
+  <%= select_tag(:departure_time, options_for_select(@dates)) %>
+  <%= label_tag(:passenger_count, "Number of passengers:") %>
+  <%= select_tag(:passenger_count, options_for_select(1..4)) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
 <% @flights.each do |flight| %>
   <ul>
     <li>
