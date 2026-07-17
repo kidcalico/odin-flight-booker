@@ -13,22 +13,26 @@
   <%= submit_tag("Search") %>
 <% end %>
 
-<% @flights.each do |flight| %>
-  <ul>
-    <li>
-      Departure airport: <%= flight.departure_airport.name %>
-    </li>
-    <li>
-      Arrival airport: <%= flight.arrival_airport.name %>
-    </li>
-    <li>
-      Departure time: <%= flight.departure_time %>
-    </li>
-    <li>
-      Arrival time: <%= flight.arrival_time %>
-    </li>
-    <li>
-      Duration: <%= flight.duration / 60 %> hours <%= flight.duration % 60 %> minutes
-    </li>
-  </ul>
+<% if @flights && @flights.any? %>
+  <%= form_with model: :flight do %>
+    <% @flights.each do |flight| %>
+      <ul>
+        <li>
+          Departure airport: <%= flight.departure_airport.name %>
+        </li>
+        <li>
+          Arrival airport: <%= flight.arrival_airport.name %>
+        </li>
+        <li>
+          Departure time: <%= flight.departure_time %>
+        </li>
+        <li>
+          Arrival time: <%= flight.arrival_time %>
+        </li>
+        <li>
+          Duration: <%= flight.duration / 60 %> hours <%= flight.duration % 60 %> minutes
+        </li>
+      </ul>
+    <% end %>
+  <% end %>
 <% end %>
