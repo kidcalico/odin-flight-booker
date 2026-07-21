@@ -28,12 +28,14 @@ offset = 0
   departures.each do |departure|
     arrivals.each do |arrival|
       unless departure.code == arrival.code
-        Flight.create do |flight|
-          flight.departure_time = rand((Time.current + offset.days)..(1.day.from_now + offset.days))
-          flight.duration = rand(300..720)
-          flight.arrival_time = flight.departure_time + flight.duration.minutes
-          flight.departure_airport = departure
-          flight.arrival_airport = arrival
+        2.times do
+          Flight.create do |flight|
+            flight.departure_time = rand((Time.current + offset.days)..(1.day.from_now + offset.days))
+            flight.duration = rand(300..720)
+            flight.arrival_time = flight.departure_time + flight.duration.minutes
+            flight.departure_airport = departure
+            flight.arrival_airport = arrival
+          end
         end
       end
     end
