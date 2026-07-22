@@ -14,25 +14,30 @@
 <% end %>
 
 <% if @flights && @flights.any? %>
-  <%= form_with model: :flight do %>
+  <%= form_with(url: "/index", method: "get") do |form| %>
     <% @flights.each do |flight| %>
-      <ul>
-        <li>
-          Departure airport: <%= flight.departure_airport.name %>
-        </li>
-        <li>
-          Arrival airport: <%= flight.arrival_airport.name %>
-        </li>
-        <li>
-          Departure time: <%= flight.departure_time %>
-        </li>
-        <li>
-          Arrival time: <%= flight.arrival_time %>
-        </li>
-        <li>
-          Duration: <%= flight.duration / 60 %> hours <%= flight.duration % 60 %> minutes
-        </li>
-      </ul>
+      <%= form.radio_button :flight_id, flight.id %>
+      <%= form.label :flight_id do %>
+        <ul>
+          <li>
+            Departure airport: <%= flight.departure_airport.name %>
+          </li>
+          <li>
+            Arrival airport: <%= flight.arrival_airport.name %>
+          </li>
+          <li>
+            Departure time: <%= flight.departure_time %>
+          </li>
+          <li>
+            Arrival time: <%= flight.arrival_time %>
+          </li>
+          <li>
+            Duration: <%= flight.duration / 60 %> hours <%= flight.duration % 60 %> minutes
+          </li>
+        </ul>
+      <% end %>
     <% end %>
+    <%= form.hidden_field :passenger_count %>
+    <%= form.submit "Select Flight" %>
   <% end %>
 <% end %>
