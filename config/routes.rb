@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "bookings/new"
   get "flights/index"
 
   get "/index", to: "flights#index"
