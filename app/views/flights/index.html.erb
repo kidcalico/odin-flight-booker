@@ -37,7 +37,7 @@
         </ul>
       <% end %>
     <% end %>
-    <%= form.hidden_field :passenger_count %>
+    <%= form.hidden_field :passenger_count, value: params[:passenger_count] %>
     <%= form.submit "Select Flight" %>
   <% end %>
 <% end %>
