@@ -14,7 +14,7 @@
 <% end %>
 
 <% if @flights && @flights.any? %>
-  <%= form_with(url: "/index", method: "get") do |form| %>
+  <%= form_with(url: new_booking_path, method: :get) do |form| %>
     <% @flights.each do |flight| %>
       <%= form.radio_button :flight_id, flight.id %>
       <%= form.label :flight_id do %>
