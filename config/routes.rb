@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  get "bookings/new"
-  get "flights/index"
+  resources :bookings, only: [ :new, :create, :show ]
+
+  get "/flights/index", to: "flights#index"
 
   get "/index", to: "flights#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
