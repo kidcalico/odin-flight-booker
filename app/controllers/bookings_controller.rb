@@ -11,4 +11,23 @@ class BookingsController < ApplicationController
       @booking.passengers.build
     end
   end
+
+  def create
+    @booking = Booking.new(booking_params)
+    if @booking.save
+      redirect_to @booking
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def show
+    @booking = Booking.find_by(id: params[:id])
+  end
+
+  private
+
+    def booking_params
+      params.require(:booking).permit(:flight_id, :passenger_count, passengers_attributes: [ :name, :email ])
+    end
 end
