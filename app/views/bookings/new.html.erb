@@ -23,5 +23,7 @@
     <%= f.label :email %>
     <%= f.text_field :email %>
   <% end %>
+  <%= form.hidden_field :passenger_count, value: @passenger_count %>
+  <%= form.hidden_field :flight_id, value: @flight_id %>
   <%= form.submit %>
 <% end %>
