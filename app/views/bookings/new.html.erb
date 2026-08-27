@@ -1,5 +1,4 @@
 <h1>New Booking</h1>
-<p>Find me in app/views/bookings/new.html.erb</p>
 
 <ul id="info">
   <li>
@@ -17,7 +16,8 @@
 </ul>
 
 <%= form_with model: @booking do |form| %>
-  <%= form.fields_for :passengers do |f| %>
+  <%= form.fields_for :passengers do |f, index| %>
+    <h3>Guest <%= f.index + 1 %></h3>
     <%= f.label :name %>
     <%= f.text_field :name %>
     <%= f.label :email %>

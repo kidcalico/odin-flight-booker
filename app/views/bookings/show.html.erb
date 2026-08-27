@@ -1,0 +1,7 @@
+<h1>Booking Successful!</h1>
+<p>
+  Congratulations, your booking for <%= @booking.flight.departure_airport.name %> on <%= @booking.flight.departure_time %> was successful!<br />
+  Passengers 
+  <%= @booking.passengers.map(&:name).to_sentence %>
+  been emailed.
+</p>
