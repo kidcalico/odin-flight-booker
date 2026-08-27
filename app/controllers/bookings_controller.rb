@@ -15,9 +15,9 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     if @booking.save
-      redirect_to @booking
+      redirect_to @booking, notice: "Booking successfully created!"
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity, alert: "There was an error, please try again."
     end
   end
 
